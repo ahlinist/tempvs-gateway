@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8080}
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: image
+          uri: http://localhost:8082
+          predicates:
+            - Path=/**
+        - id: message
+          uri: http://localhost:8083
+          predicates:
+            - Path=/**
+        - id: library
+          uri: http://localhost:8085
+          predicates:
+            - Path=/**
+        - id: stash
+          uri: http://localhost:8086
+          predicates:
+            - Path=/**
+        - id: profile
+          uri: http://localhost:8087
+          predicates:
+            - Path=/**
+        - id: user
+          uri: http://localhost:8088
+          predicates:
+            - Path=/**
