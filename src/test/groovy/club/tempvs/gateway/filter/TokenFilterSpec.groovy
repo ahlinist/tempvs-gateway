@@ -11,7 +11,8 @@ class TokenFilterSpec extends Specification {
     private static final String AUTHORIZATION_HEADER_NAME = "Authorization"
     private static final String TOKEN = "token"
 
-    @Subject TokenFilter tokenFilter
+    @Subject
+    TokenFilter tokenFilter
 
     def exchange = Mock ServerWebExchange
     def chain = Mock GatewayFilterChain

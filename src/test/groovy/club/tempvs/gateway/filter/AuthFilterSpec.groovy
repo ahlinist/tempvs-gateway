@@ -14,7 +14,8 @@ class AuthFilterSpec extends Specification {
     private static final String AUTH_COOKIE_NAME = "TEMPVS_AUTH"
     private static final String USER_INFO_HEADER_NAME = "User-Info"
 
-    @Subject AuthFilter authFilter
+    @Subject
+    AuthFilter authFilter
 
     def exchange = Mock ServerWebExchange
     def chain = Mock GatewayFilterChain
