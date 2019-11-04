@@ -38,6 +38,11 @@ dependencyManagement {
 	}
 }
 
+bootJar {
+	archiveBaseName = 'tempvs-gateway'
+	archiveVersion = ''
+}
+
 test {
 	useJUnitPlatform()
 }
