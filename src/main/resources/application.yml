@@ -9,24 +9,36 @@ spring:
       - id: image
         uri: http://localhost:8082
         predicates:
-        - Path=/image/**
+        - Path=/api/image/**
+        filters:
+          - RewritePath=/api/image(?<segment>.*), /$\{segment}
       - id: message
         uri: http://localhost:8083
         predicates:
-        - Path=/message/**
+        - Path=/api/message/**
+        filters:
+          - RewritePath=/api/message(?<segment>.*), /$\{segment}
       - id: library
         uri: http://localhost:8085
         predicates:
-        - Path=/library/**
+        - Path=/api/library/**
+        filters:
+          - RewritePath=/api/library(?<segment>.*), /$\{segment}
       - id: stash
         uri: http://localhost:8086
         predicates:
-        - Path=/stash/**
+        - Path=/api/stash/**
+        filters:
+          - RewritePath=/api/stash(?<segment>.*), /$\{segment}
       - id: profile
         uri: http://localhost:8087
         predicates:
-        - Path=/profile/**
+        - Path=/api/profile/**
+        filters:
+          - RewritePath=/api/profile(?<segment>.*), /$\{segment}
       - id: user
         uri: http://localhost:8088
         predicates:
-        - Path=/user/**
+        - Path=/api/user/**
+        filters:
+          - RewritePath=/api/user(?<segment>.*), /$\{segment}
