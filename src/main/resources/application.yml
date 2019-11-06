@@ -2,43 +2,62 @@ server:
   port: ${PORT:8080}
 authorization:
   token: ${TOKEN:security_token}
+app:
+  image:
+    name: image
+    url: http://localhost:8082
+  message:
+    name: message
+    url: http://localhost:8083
+  library:
+    name: library
+    url: http://localhost:8085
+  stash:
+    name: stash
+    url: http://localhost:8086
+  profile:
+    name: profile
+    url: http://localhost:8087
+  user:
+    name: user
+    url: http://localhost:8088
 spring:
   cloud:
     gateway:
       routes:
-      - id: image
-        uri: http://localhost:8082
+      - id: ${app.image.name}
+        uri: ${app.image.url}
         predicates:
-        - Path=/api/image/**
+        - Path=/api/${app.image.name}/**
         filters:
-          - RewritePath=/api/image(?<segment>.*), /$\{segment}
-      - id: message
-        uri: http://localhost:8083
+          - RewritePath=/api/${app.image.name}(?<segment>.*), /$\{segment}
+      - id: ${app.message.name}
+        uri: ${app.message.url}
         predicates:
-        - Path=/api/message/**
+        - Path=/api/${app.message.name}/**
         filters:
-          - RewritePath=/api/message(?<segment>.*), /$\{segment}
-      - id: library
-        uri: http://localhost:8085
+          - RewritePath=/api/${app.message.name}(?<segment>.*), /$\{segment}
+      - id: ${app.library.name}
+        uri: ${app.library.url}
         predicates:
-        - Path=/api/library/**
+        - Path=/api/${app.library.name}/**
         filters:
-          - RewritePath=/api/library(?<segment>.*), /$\{segment}
-      - id: stash
-        uri: http://localhost:8086
+          - RewritePath=/api/${app.library.name}(?<segment>.*), /$\{segment}
+      - id: ${app.stash.name}
+        uri: ${app.stash.url}
         predicates:
-        - Path=/api/stash/**
+        - Path=/api/${app.stash.name}/**
         filters:
-          - RewritePath=/api/stash(?<segment>.*), /$\{segment}
-      - id: profile
-        uri: http://localhost:8087
+          - RewritePath=/api/${app.stash.name}(?<segment>.*), /$\{segment}
+      - id: ${app.profile.name}
+        uri: ${app.profile.url}
         predicates:
-        - Path=/api/profile/**
+        - Path=/api/${app.profile.name}/**
         filters:
-          - RewritePath=/api/profile(?<segment>.*), /$\{segment}
-      - id: user
-        uri: http://localhost:8088
+          - RewritePath=/api/${app.profile.name}(?<segment>.*), /$\{segment}
+      - id: ${app.user.name}
+        uri: ${app.user.url}
         predicates:
-        - Path=/api/user/**
+        - Path=/api/${app.user.name}/**
         filters:
-          - RewritePath=/api/user(?<segment>.*), /$\{segment}
+          - RewritePath=/api/${app.user.name}(?<segment>.*), /$\{segment}
