@@ -77,3 +77,42 @@ app:
     url: https://tempvs-profile-stage.herokuapp.com
   user:
     url: https://tempvs-user-stage.herokuapp.com
+  cloud:
+    gateway:
+      routes:
+        - id: ${app.image.name}
+          uri: ${app.image.url}
+          predicates:
+            - Path=/api/${app.image.name}/**
+          filters:
+            - RewritePath=/api/${app.image.name}(?<segment>.*), /$\{segment}
+        - id: ${app.message.name}
+          uri: ${app.message.url}
+          predicates:
+            - Path=/api/${app.message.name}/**
+          filters:
+            - RewritePath=/api/${app.message.name}(?<segment>.*), /$\{segment}
+        - id: ${app.library.name}
+          uri: ${app.library.url}
+          predicates:
+            - Path=/api/${app.library.name}/**
+          filters:
+            - RewritePath=/api/${app.library.name}(?<segment>.*), /$\{segment}
+        - id: ${app.stash.name}
+          uri: ${app.stash.url}
+          predicates:
+            - Path=/api/${app.stash.name}/**
+          filters:
+            - RewritePath=/api/${app.stash.name}(?<segment>.*), /$\{segment}
+        - id: ${app.profile.name}
+          uri: ${app.profile.url}
+          predicates:
+            - Path=/api/${app.profile.name}/**
+          filters:
+            - RewritePath=/api/${app.profile.name}(?<segment>.*), /$\{segment}
+        - id: ${app.user.name}
+          uri: ${app.user.url}
+          predicates:
+            - Path=/api/${app.user.name}/**
+          filters:
+            - RewritePath=/api/${app.user.name}(?<segment>.*), /$\{segment}
