@@ -9,7 +9,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-//@Component
+@Component
 public class TokenFilter implements GlobalFilter {
 
     private static final String CHAR_ENCODING = "UTF-8";

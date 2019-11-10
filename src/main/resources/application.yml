@@ -12,61 +12,55 @@ authorization:
   token: ${TOKEN:security_token}
 app:
   image:
-    name: image
     url: http://localhost:8082
   message:
-    name: message
     url: http://localhost:8083
   library:
-    name: library
     url: http://localhost:8085
   stash:
-    name: stash
     url: http://localhost:8086
   profile:
-    name: profile
     url: http://localhost:8087
   user:
-    name: user
     url: http://localhost:8088
 spring:
   cloud:
     gateway:
       routes:
-        - id: ${app.image.name}
+        - id: image
           uri: ${app.image.url}
           predicates:
-            - Path=/api/${app.image.name}/**
+            - Path=/api/image/**
           filters:
             - StripPrefix=2
-        - id: ${app.message.name}
+        - id: message
           uri: ${app.message.url}
           predicates:
-            - Path=/api/${app.message.name}/**
+            - Path=/api/message/**
           filters:
             - StripPrefix=2
-        - id: ${app.library.name}
+        - id: library
           uri: ${app.library.url}
           predicates:
-            - Path=/api/${app.library.name}/**
+            - Path=/api/library/**
           filters:
             - StripPrefix=2
-        - id: ${app.stash.name}
+        - id: stash
           uri: ${app.stash.url}
           predicates:
-            - Path=/api/${app.stash.name}/**
+            - Path=/api/stash/**
           filters:
             - StripPrefix=2
-        - id: ${app.profile.name}
+        - id: profile
           uri: ${app.profile.url}
           predicates:
-            - Path=/api/${app.profile.name}/**
+            - Path=/api/profile/**
           filters:
             - StripPrefix=2
-        - id: ${app.user.name}
+        - id: user
           uri: ${app.user.url}
           predicates:
-            - Path=/api/${app.user.name}/**
+            - Path=/api/user/**
           filters:
             - StripPrefix=2
 ---
