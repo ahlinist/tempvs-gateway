@@ -23,7 +23,8 @@ public class AuthFilter implements GlobalFilter {
         HttpCookie authCookie = request.getCookies()
                 .getFirst(AUTH_COOKIE_NAME);
 
-        String userInfoValue = Optional.ofNullable(authCookie.getValue())
+        String userInfoValue = Optional.ofNullable(authCookie)
+                .map(HttpCookie::getValue)
                 .map(Base64Utils::decodeFromString)
                 .map(String::new)
                 .orElse(null);
