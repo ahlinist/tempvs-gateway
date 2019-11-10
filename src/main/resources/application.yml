@@ -105,7 +105,7 @@ app:
           predicates:
             - Path=/api/${app.library.name}/**
           filters:
-            - RewritePath=/api/${app.library.name}(?<segment>.*), /$\{segment}
+            - RewritePath=/${app.library.name}(?<segment>.*), /$\{segment}
         - id: ${app.stash.name}
           uri: ${app.stash.url}
           predicates:
