@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
-@Component
+//@Component
 public class AuthFilter implements GlobalFilter {
 
     private static final String AUTH_COOKIE_NAME = "TEMPVS_AUTH";
