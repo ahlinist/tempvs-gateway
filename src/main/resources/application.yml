@@ -23,6 +23,7 @@ app:
     url: https://tempvs-profile-stage.herokuapp.com
   user:
     url: https://tempvs-user-stage.herokuapp.com
+spring:
   cloud:
     gateway:
       routes:
