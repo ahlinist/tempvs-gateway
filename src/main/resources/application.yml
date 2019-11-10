@@ -100,12 +100,10 @@ app:
             - Path=/api/${app.message.name}/**
           filters:
             - RewritePath=/api/${app.message.name}(?<segment>.*), /$\{segment}
-        - id: ${app.library.name}
-          uri: ${app.library.url}
+        - id: library
+          uri: https://tempvs-library-stage.herokuapp.com
           predicates:
-            - Path=/api/${app.library.name}/**
-          filters:
-            - RewritePath=/${app.library.name}(?<segment>.*), /$\{segment}
+            - Path=/api/library/**
         - id: ${app.stash.name}
           uri: ${app.stash.url}
           predicates:
