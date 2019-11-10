@@ -104,6 +104,8 @@ app:
           uri: https://tempvs-library-stage.herokuapp.com
           predicates:
             - Path=/api/library/**
+          filters:
+            - RewritePath=/api/library(?<segment>.*), /$\{segment}
         - id: ${app.stash.name}
           uri: ${app.stash.url}
           predicates:
