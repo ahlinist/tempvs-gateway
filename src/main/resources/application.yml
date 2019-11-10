@@ -38,37 +38,37 @@ spring:
           predicates:
             - Path=/api/${app.image.name}/**
           filters:
-            - RewritePath=/api/${app.image.name}(?<segment>.*), /$\{segment}
+            - StripPrefix=2
         - id: ${app.message.name}
           uri: ${app.message.url}
           predicates:
             - Path=/api/${app.message.name}/**
           filters:
-            - RewritePath=/api/${app.message.name}(?<segment>.*), /$\{segment}
+            - StripPrefix=2
         - id: ${app.library.name}
           uri: ${app.library.url}
           predicates:
             - Path=/api/${app.library.name}/**
           filters:
-            - RewritePath=/api/${app.library.name}(?<segment>.*), /$\{segment}
+            - StripPrefix=2
         - id: ${app.stash.name}
           uri: ${app.stash.url}
           predicates:
             - Path=/api/${app.stash.name}/**
           filters:
-            - RewritePath=/api/${app.stash.name}(?<segment>.*), /$\{segment}
+            - StripPrefix=2
         - id: ${app.profile.name}
           uri: ${app.profile.url}
           predicates:
             - Path=/api/${app.profile.name}/**
           filters:
-            - RewritePath=/api/${app.profile.name}(?<segment>.*), /$\{segment}
+            - StripPrefix=2
         - id: ${app.user.name}
           uri: ${app.user.url}
           predicates:
             - Path=/api/${app.user.name}/**
           filters:
-            - RewritePath=/api/${app.user.name}(?<segment>.*), /$\{segment}
+            - StripPrefix=2
 ---
 spring:
   profiles: stage
