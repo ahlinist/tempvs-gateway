@@ -12,16 +12,22 @@ authorization:
   token: ${TOKEN:security_token}
 app:
   image:
+    name: image
     url: https://tempvs-image-stage.herokuapp.com
   message:
+    name: message
     url: https://tempvs-message-stage.herokuapp.com
   library:
+    name: library
     url: https://tempvs-library-stage.herokuapp.com
   stash:
+    name: stash
     url: https://tempvs-stash-stage.herokuapp.com
   profile:
+    name: profile
     url: https://tempvs-profile-stage.herokuapp.com
   user:
+    name: user
     url: https://tempvs-user-stage.herokuapp.com
 spring:
   cloud:
@@ -39,12 +45,12 @@ spring:
             - Path=/api/${app.message.name}/**
           filters:
             - RewritePath=/api/${app.message.name}(?<segment>.*), /$\{segment}
-        - id: library
-          uri: https://tempvs-library-stage.herokuapp.com
+        - id: ${app.library.name}
+          uri: ${app.library.url}
           predicates:
-            - Path=/api/library/**
+            - Path=/api/${app.library.name}/**
           filters:
-            - RewritePath=/api/library(?<segment>.*), /$\{segment}
+            - RewritePath=/api/${app.library.name}(?<segment>.*), /$\{segment}
         - id: ${app.stash.name}
           uri: ${app.stash.url}
           predicates:
