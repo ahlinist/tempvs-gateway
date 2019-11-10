@@ -13,22 +13,22 @@ authorization:
 app:
   image:
     name: image
-    url: https://tempvs-image-stage.herokuapp.com
+    url: http://localhost:8082
   message:
     name: message
-    url: https://tempvs-message-stage.herokuapp.com
+    url: http://localhost:8083
   library:
     name: library
-    url: https://tempvs-library-stage.herokuapp.com
+    url: http://localhost:8085
   stash:
     name: stash
-    url: https://tempvs-stash-stage.herokuapp.com
+    url: http://localhost:8086
   profile:
     name: profile
-    url: https://tempvs-profile-stage.herokuapp.com
+    url: http://localhost:8087
   user:
     name: user
-    url: https://tempvs-user-stage.herokuapp.com
+    url: http://localhost:8088
 spring:
   cloud:
     gateway:
@@ -49,6 +49,8 @@ spring:
           uri: ${app.library.url}
           predicates:
             - Path=/api/${app.library.name}/**
+          filters:
+            - RewritePath=/api/${app.library.name}(?<segment>.*), /$\{segment}
         - id: ${app.stash.name}
           uri: ${app.stash.url}
           predicates:
@@ -67,3 +69,19 @@ spring:
             - Path=/api/${app.user.name}/**
           filters:
             - RewritePath=/api/${app.user.name}(?<segment>.*), /$\{segment}
+---
+spring:
+  profiles: stage
+app:
+  image:
+    url: https://tempvs-image-stage.herokuapp.com
+  message:
+    url: https://tempvs-message-stage.herokuapp.com
+  library:
+    url: https://tempvs-library-stage.herokuapp.com
+  stash:
+    url: https://tempvs-stash-stage.herokuapp.com
+  profile:
+    url: https://tempvs-profile-stage.herokuapp.com
+  user:
+    url: https://tempvs-user-stage.herokuapp.com
