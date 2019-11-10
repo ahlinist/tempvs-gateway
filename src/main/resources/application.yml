@@ -12,17 +12,17 @@ authorization:
   token: ${TOKEN:security_token}
 app:
   image:
-    url: https://tempvs-image-stage.herokuapp.com
+    url: http://localhost:8082
   message:
-    url: https://tempvs-message-stage.herokuapp.com
+    url: http://localhost:8083
   library:
-    url: https://tempvs-library-stage.herokuapp.com
+    url: http://localhost:8085
   stash:
-    url: https://tempvs-stash-stage.herokuapp.com
+    url: http://localhost:8086
   profile:
-    url: https://tempvs-profile-stage.herokuapp.com
+    url: http://localhost:8087
   user:
-    url: https://tempvs-user-stage.herokuapp.com
+    url: http://localhost:8088
 spring:
   cloud:
     gateway:
@@ -63,3 +63,19 @@ spring:
             - Path=/api/user/**
           filters:
             - StripPrefix=2
+---
+spring:
+  profiles: stage
+app:
+  image:
+    url: https://tempvs-image-stage.herokuapp.com
+  message:
+    url: https://tempvs-message-stage.herokuapp.com
+  library:
+    url: https://tempvs-library-stage.herokuapp.com
+  stash:
+    url: https://tempvs-stash-stage.herokuapp.com
+  profile:
+    url: https://tempvs-profile-stage.herokuapp.com
+  user:
+    url: https://tempvs-user-stage.herokuapp.com
