@@ -72,7 +72,7 @@ app:
   message:
     url: https://tempvs-message-stage.herokuapp.com
   library:
-    url: https://tempvs-library-stage.herokuapp.com
+    url: https://tempvs-library-stage.herokuapp.com:443
   stash:
     url: https://tempvs-stash-stage.herokuapp.com
   profile:
