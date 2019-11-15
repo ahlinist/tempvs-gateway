@@ -45,9 +45,6 @@ spring:
             - Path=/api/library/**
 #          filters:
 #            - StripPrefix=2
-          filters:
-            - RemoveRequestHeader=Via
-            - RemoveResponseHeader=Via
         - id: stash
           uri: ${app.stash.url}
           predicates:
