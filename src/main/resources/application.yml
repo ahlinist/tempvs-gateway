@@ -45,6 +45,11 @@ spring:
             - Path=/api/library/**
 #          filters:
 #            - StripPrefix=2
+          filters:
+            - RemoveRequestHeader=Via
+            - RemoveRequestHeader=X-Forwarded-For
+            - RemoveResponseHeader=Via
+            - RemoveResponseHeader=X-Forwarded-For
         - id: stash
           uri: ${app.stash.url}
           predicates:
@@ -72,10 +77,10 @@ app:
   message:
     url: https://tempvs-message-stage.herokuapp.com
   library:
-    url: http://tempvs-library-stage.herokuapp.com
+    url: https://tempvs-library-stage.herokuapp.com
   stash:
     url: https://tempvs-stash-stage.herokuapp.com
   profile:
     url: https://tempvs-profile-stage.herokuapp.com
   user:
-    url: http://tempvs-user-stage.herokuapp.com
+    url: https://tempvs-user-stage.herokuapp.com
