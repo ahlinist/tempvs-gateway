@@ -32,12 +32,14 @@ spring:
           predicates:
             - Path=/api/image/**
           filters:
+            - RemoveRequestHeader=Host
             - StripPrefix=2
         - id: message
           uri: ${app.message.url}
           predicates:
             - Path=/api/message/**
           filters:
+            - RemoveRequestHeader=Host
             - StripPrefix=2
         - id: library
           uri: ${app.library.url}
@@ -45,25 +47,28 @@ spring:
             - Path=/api/library/**
           filters:
             - RemoveRequestHeader=Host
-#            - StripPrefix=2
+            - StripPrefix=2
         - id: stash
           uri: ${app.stash.url}
           predicates:
             - Path=/api/stash/**
           filters:
+            - RemoveRequestHeader=Host
             - StripPrefix=2
         - id: profile
           uri: ${app.profile.url}
           predicates:
             - Path=/api/profile/**
           filters:
+            - RemoveRequestHeader=Host
             - StripPrefix=2
         - id: user
           uri: ${app.user.url}
           predicates:
             - Path=/api/user/**
-#          filters:
-#            - StripPrefix=2
+          filters:
+            - RemoveRequestHeader=Host
+            - StripPrefix=2
 ---
 spring:
   profiles: stage
@@ -79,5 +84,4 @@ app:
   profile:
     url: https://tempvs-profile-stage.herokuapp.com
   user:
-    #url: https://tempvs-user-stage.herokuapp.com
-    url: https://tut.by
+    url: https://tempvs-user-stage.herokuapp.com
