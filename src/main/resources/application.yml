@@ -43,7 +43,8 @@ spring:
           uri: ${app.library.url}
           predicates:
             - Path=/api/library/**
-#          filters:
+          filters:
+            - RemoveRequestHeader=Host
 #            - StripPrefix=2
         - id: stash
           uri: ${app.stash.url}
