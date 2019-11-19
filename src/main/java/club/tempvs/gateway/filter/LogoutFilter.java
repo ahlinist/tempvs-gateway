@@ -19,7 +19,11 @@ public class LogoutFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+        return chain.filter(exchange).then(Mono.fromRunnable(clearCookies(exchange)));
+    }
+
+    Runnable clearCookies(ServerWebExchange exchange) {
+        return () -> {
             ServerHttpResponse response = exchange.getResponse();
             String logoutHeader = response.getHeaders()
                     .getFirst(LOGOUT_HEADER);
@@ -28,6 +32,6 @@ public class LogoutFilter implements GlobalFilter {
                 response.addCookie(cookieHelper.clearAuthCookie());
                 response.addCookie(cookieHelper.clearLoggedInCookie());
             }
-        }));
+        };
     }
 }

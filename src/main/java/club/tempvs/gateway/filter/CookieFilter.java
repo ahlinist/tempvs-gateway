@@ -20,11 +20,11 @@ public class CookieFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         return chain.filter(exchange)
-                .then(refreshCookiesMono(exchange));
+                .then(Mono.fromRunnable(refreshCookies(exchange)));
     }
 
-    private Mono<Void> refreshCookiesMono(ServerWebExchange exchange) {
-        return Mono.fromRunnable(() -> {
+    Runnable refreshCookies(ServerWebExchange exchange) {
+        return () -> {
             ServerHttpResponse response = exchange.getResponse();
             String userInfo = response.getHeaders()
                     .getFirst(REFRESH_COOKIES_HEADER);
@@ -33,6 +33,6 @@ public class CookieFilter implements GlobalFilter {
                 response.addCookie(cookieHelper.buildAuthCookie(userInfo));
                 response.addCookie(cookieHelper.buildLoggedInCookie());
             }
-        });
+        };
     }
 }
