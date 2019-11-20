@@ -5,5 +5,5 @@ spring:
     config:
       uri: ${CONFIG_SERVER_URI}
       fail-fast: true
-      username: ${AUTH_NAME}
-      password: ${AUTH_PASSWORD}
+      username: ${CONFIG_AUTH_NAME}
+      password: ${CONFIG_AUTH_PASSWORD}
