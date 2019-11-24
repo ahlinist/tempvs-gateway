@@ -1,8 +1,10 @@
 package club.tempvs.gateway.filter
 
+import club.tempvs.gateway.helper.CryptoHelper
 import org.springframework.cloud.gateway.filter.GatewayFilterChain
 import org.springframework.http.HttpCookie
 import org.springframework.http.server.reactive.ServerHttpRequest
+import static org.springframework.http.server.reactive.ServerHttpRequest.Builder
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.server.ServerWebExchange
@@ -14,20 +16,18 @@ class AuthFilterSpec extends Specification {
     private static final String AUTH_COOKIE_NAME = "TEMPVS_AUTH"
     private static final String USER_INFO_HEADER_NAME = "User-Info"
 
+    CryptoHelper cryptoHelper = Mock CryptoHelper
+
     @Subject
-    AuthFilter authFilter
+    private AuthFilter authFilter = new AuthFilter(cryptoHelper)
 
-    def exchange = Mock ServerWebExchange
-    def chain = Mock GatewayFilterChain
+    ServerWebExchange exchange = Mock ServerWebExchange
+    GatewayFilterChain chain = Mock GatewayFilterChain
 
-    def request = Mock ServerHttpRequest
-    def mutatedRequest = Mock ServerHttpRequest
-    def requestBuilder = Mock ServerHttpRequest.Builder
-    def cookie = Mock HttpCookie
-
-    def setup() {
-        authFilter = new AuthFilter()
-    }
+    ServerHttpRequest request = Mock ServerHttpRequest
+    ServerHttpRequest mutatedRequest = Mock ServerHttpRequest
+    Builder requestBuilder = Mock Builder
+    HttpCookie cookie = Mock HttpCookie
 
     def "authFilter adds 'User-Info' header downstream"() {
         given:
@@ -39,6 +39,7 @@ class AuthFilterSpec extends Specification {
         authFilter.filter(exchange, chain)
 
         then:
+        1 * cryptoHelper.decrypt(authCookieValue) >> userInfoValue
         1 * exchange.request >> request
         1 * request.cookies >> cookies
         1 * cookie.value >> authCookieValue

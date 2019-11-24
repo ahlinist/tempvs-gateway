@@ -13,8 +13,10 @@ class CookieHelperSpec extends Specification {
     private static final String LOGGED_IN_COOKIE_NAME = "TEMPVS_LOGGED_IN";
     private static final String LOGGED_IN_COOKIE_VALUE = "true";
 
+    CryptoHelper cryptoHelper = Mock CryptoHelper
+
     @Subject
-    private CookieHelper cookieHelper = new CookieHelper()
+    private CookieHelper cookieHelper = new CookieHelper(cryptoHelper)
 
     def "build auth cookie"() {
         given:
@@ -25,6 +27,10 @@ class CookieHelperSpec extends Specification {
         HttpCookie result = cookieHelper.buildAuthCookie(userInfo)
 
         then:
+        1 * cryptoHelper.encrypt(userInfo) >> encodedUserInfo
+        0 * _
+
+        and:
         result.name == AUTH_COOKIE_NAME
         result.value == encodedUserInfo
         result.maxAge == Duration.ofDays(30)

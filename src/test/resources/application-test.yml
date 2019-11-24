@@ -1,2 +1,4 @@
 authorization:
   token: token
+crypto:
+  key: key

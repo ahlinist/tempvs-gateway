@@ -6,7 +6,6 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
-import java.util.Base64;
 
 @Component
 @RequiredArgsConstructor
@@ -17,9 +16,11 @@ public class CookieHelper {
     private static final String LOGGED_IN_COOKIE_VALUE = "true";
     private static final String COOKIE_ROOT_PATH = "/";
 
+    private final CryptoHelper cryptoHelper;
+
     @SneakyThrows
     public ResponseCookie buildAuthCookie(String userInfo) {
-        String encodedCookieValue = Base64.getEncoder().encodeToString(userInfo.getBytes());
+        String encodedCookieValue = cryptoHelper.encrypt(userInfo);
         return ResponseCookie.from(AUTH_COOKIE_NAME, encodedCookieValue)
                 .httpOnly(true)
                 .secure(false)
